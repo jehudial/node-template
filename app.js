@@ -36,5 +36,13 @@ app.use((req, res, next) => {
     res.json({ message: error.message || "An unkown error occurred!" });
   });
   
-app.listen(5000)
+  mongoose
+  .connect(`${process.env.DB_CONNECTION}`)
+  .then(() => {
+    app.listen(process.env.PORT);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 
